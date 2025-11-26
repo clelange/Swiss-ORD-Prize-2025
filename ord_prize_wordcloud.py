@@ -35,14 +35,12 @@ cmap = mpl.colors.ListedColormap(cmap[10:,:-1])
 
 worksheets = []
 for file in os.listdir(input_dir):
-    if file.endswith('.xlsx'):
+    if file.endswith('.xlsx') and not file.startswith('~$'):
         full_path = os.path.join(input_dir, file)
         wb = load_workbook(full_path)
         ws = wb.active
         worksheets.append(ws)
 
-for ws in worksheets:
-    print(ws[row_dict['gender']].value)
 
 # Collect gender values and create pie chart
 genders = [ws[row_dict['gender']].value for ws in worksheets]
@@ -102,6 +100,14 @@ for i, autotext in enumerate(autotexts):
     autotext.set_color(get_text_color(color))
 plt.title('Application Positions', fontproperties=font_prop, fontsize=16)
 plt.savefig('position_pie_chart.pdf')
+
+
+# Plot institution distribution
+institutions = [ws[row_dict['institution']].value for ws in worksheets]
+print(institutions)
+institution_counts = Counter(institutions)
+print(institution_counts)
+
 
 # Word cloud for descriptions
 descriptions = [ws[row_dict['description']].value for ws in worksheets if ws[row_dict['description']].value]

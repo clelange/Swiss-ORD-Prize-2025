@@ -1,3 +1,7 @@
 openpyxl
 pandas
 wordcloud
+shapely
+geopy
+matplotlib
+adjustText
