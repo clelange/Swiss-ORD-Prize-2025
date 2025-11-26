@@ -111,6 +111,9 @@ custom_font = FontProperties(fname=font_path)
 
 # Plotting
 fig, ax = plt.subplots(figsize=(20, 15))
+# Make figure background transparent
+fig.patch.set_alpha(0)
+ax.patch.set_alpha(0)
 
 # Plot Switzerland border
 for feature in swiss_geojson['features']:
@@ -136,7 +139,7 @@ scatter = ax.scatter(lons, lats, color='red', marker='o', s=200, label='Institut
 # Add labels with custom font
 texts = []
 for i, txt in enumerate(names):
-    texts.append(ax.text(lons[i], lats[i], txt, fontsize=14, fontproperties=custom_font,
+    texts.append(ax.text(lons[i], lats[i], txt, fontsize=18, fontproperties=custom_font,
                          bbox=dict(boxstyle='round,pad=0.5', facecolor='white', alpha=0.7, edgecolor='none')))
 
 # Adjust text to avoid overlap with increased spacing
@@ -216,6 +219,6 @@ ax.axis('off')
 
 # Save
 output_file = 'institutions_map.png'
-plt.savefig(output_file, dpi=300, bbox_inches='tight')
-plt.savefig(output_file.replace('png', 'pdf'), dpi=300, bbox_inches='tight')
+plt.savefig(output_file, dpi=300, bbox_inches='tight', transparent=True)
+plt.savefig(output_file.replace('png', 'pdf'), dpi=300, bbox_inches='tight', transparent=True)
 print(f"Map saved to {output_file}")
