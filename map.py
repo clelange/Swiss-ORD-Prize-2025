@@ -26,6 +26,7 @@ institute_translations = {
     'Dodis (Diplomatic Documents of Switzerland)': 'Swiss Academy of Humanities and Social Sciences',
     'Empa': 'EMPA',
     'Université de Fribourg': 'University of Fribourg',
+    'Hochschule der Künste Bern': 'Bern Academy of the Arts (HKB)',
 }
 # Normalize institution names
 institutions = [institute_translations.get(inst, inst) for inst in institutions]
@@ -130,22 +131,91 @@ lons = [loc[1] for loc in locations.values()]
 names = list(locations.keys())
 
 # Increased marker size
-ax.scatter(lons, lats, color='red', marker='o', s=200, label='Institutions', zorder=5)
+scatter = ax.scatter(lons, lats, color='red', marker='o', s=200, label='Institutions', zorder=5)
 
 # Add labels with custom font
 texts = []
 for i, txt in enumerate(names):
-    texts.append(ax.text(lons[i], lats[i], txt, fontsize=14, fontproperties=custom_font))
+    texts.append(ax.text(lons[i], lats[i], txt, fontsize=14, fontproperties=custom_font,
+                         bbox=dict(boxstyle='round,pad=0.5', facecolor='white', alpha=0.7, edgecolor='none')))
 
-# Adjust text to avoid overlap, removed arrows
+# Adjust text to avoid overlap with increased spacing
 print("Adjusting text labels...")
-adjust_text(texts)
+adjust_text(texts,
+            add_objects=[scatter],
+            expand_points=(2, 2),  # Increase spacing around points
+            expand_text=(1.5, 1.5),  # Increase spacing around text
+            expand_objects=(1.5, 1.5),  # Increase spacing around scatter points
+            force_points=(0.5, 0.5),  # Push text away from points
+            force_text=(0.5, 0.5))  # Push text away from other text
+
+# Manual adjustments for specific labels
+for text in texts:
+    if text.get_text() == 'University of Geneva':
+        x, y = text.get_position()
+        text.set_position((x, y + 0.03))
+    elif text.get_text() == 'WSL':
+        x, y = text.get_position()
+        text.set_position((x+ 0.03, y))
+    elif text.get_text() == 'University of Applied Sciences and Arts Western Switzerland (HES-SO)':
+        x, y = text.get_position()
+        text.set_position((x + 0.02, y + 0.01))
+    elif text.get_text() == 'Bern Academy of the Arts (HKB)':
+        x, y = text.get_position()
+        text.set_position((x - 0.48, y))
+    elif text.get_text() == 'Bern University of Applied Sciences':
+        x, y = text.get_position()
+        text.set_position((x + 0.14, y - 0.02))
+    elif text.get_text() == 'Eastern Switzerland University of Applied Sciences':
+        x, y = text.get_position()
+        text.set_position((x, y + 0.04))
+    elif text.get_text() == 'University of Zurich':
+        x, y = text.get_position()
+        text.set_position((x - 0.03, y - 0.03))
+    elif text.get_text() == 'ETHZ':
+        x, y = text.get_position()
+        text.set_position((x + 0.01, y - 0.005))
+    elif text.get_text() == 'EAWAG':
+        x, y = text.get_position()
+        text.set_position((x + 0.02, y + 0.02))
+    elif text.get_text() == 'Swiss Academy of Humanities and Social Sciences':
+        x, y = text.get_position()
+        text.set_position((x - 0.05, y - 0.03))
+    elif text.get_text() == 'University of Applied Sciences and Arts of Southern Switzerland (SUPSI)':
+        x, y = text.get_position()
+        text.set_position((x - 0.04, y + 0.03))
+    elif text.get_text() == 'Lucerne School of Design, Film and Art':
+        x, y = text.get_position()
+        text.set_position((x - 0.08, y + 0.01))
+    elif text.get_text() == 'University of Lucerne':
+        x, y = text.get_position()
+        text.set_position((x - 0.18, y - 0.02))
+    elif text.get_text() == 'University of Fribourg':
+        x, y = text.get_position()
+        text.set_position((x + 0.04, y - 0.06))
+    elif text.get_text() == 'EMPA':
+        x, y = text.get_position()
+        text.set_position((x + 0.02, y - 0.04))
+    elif text.get_text() == 'SIB Swiss Institute of Bioinformatics':
+        x, y = text.get_position()
+        text.set_position((x + 0.02, y - 0.01))
+    elif text.get_text() == 'Università della Svizzera italiana':
+        x, y = text.get_position()
+        text.set_position((x + 0.02, y - 0.01))
+    elif text.get_text() == 'EPFL':
+        x, y = text.get_position()
+        text.set_position((x, y + 0.02))
+    elif text.get_text() == 'University of Lausanne':
+        x, y = text.get_position()
+        text.set_position((x + 0.02, y - 0.01))
+
 
 # Add title and remove axis
-ax.set_title('Institutions in Switzerland', fontsize=30, fontproperties=custom_font)
+# ax.set_title('National ORD Prize 2025 Entries', fontsize=60, fontproperties=custom_font)
 ax.axis('off')
 
 # Save
 output_file = 'institutions_map.png'
 plt.savefig(output_file, dpi=300, bbox_inches='tight')
+plt.savefig(output_file.replace('png', 'pdf'), dpi=300, bbox_inches='tight')
 print(f"Map saved to {output_file}")
