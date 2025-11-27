@@ -139,7 +139,7 @@ scatter = ax.scatter(lons, lats, color='red', marker='o', s=200, label='Institut
 # Add labels with custom font
 texts = []
 for i, txt in enumerate(names):
-    texts.append(ax.text(lons[i], lats[i], txt, fontsize=18, fontproperties=custom_font,
+    texts.append(ax.text(lons[i], lats[i], txt, fontsize=20, fontproperties=custom_font,
                          bbox=dict(boxstyle='round,pad=0.5', facecolor='white', alpha=0.7, edgecolor='none')))
 
 # Adjust text to avoid overlap with increased spacing
@@ -156,49 +156,58 @@ adjust_text(texts,
 for text in texts:
     if text.get_text() == 'University of Geneva':
         x, y = text.get_position()
-        text.set_position((x, y + 0.03))
+        text.set_position((x - 0.1, y + 0.05))
+    elif text.get_text() == 'University of Basel':
+        x, y = text.get_position()
+        text.set_position((x - 0.06, y + 0.04))
+    elif text.get_text() == 'SIB Swiss Institute of Bioinformatics':
+        x, y = text.get_position()
+        text.set_position((x - 1.1, y - 0.05))
     elif text.get_text() == 'WSL':
         x, y = text.get_position()
-        text.set_position((x+ 0.03, y))
+        text.set_position((x+ 0.05, y))
     elif text.get_text() == 'University of Applied Sciences and Arts Western Switzerland (HES-SO)':
         x, y = text.get_position()
         text.set_position((x + 0.02, y + 0.01))
     elif text.get_text() == 'Bern Academy of the Arts (HKB)':
         x, y = text.get_position()
-        text.set_position((x - 0.48, y))
+        text.set_position((x - 0.21, y))
     elif text.get_text() == 'Bern University of Applied Sciences':
         x, y = text.get_position()
-        text.set_position((x + 0.14, y - 0.02))
+        text.set_position((x + 0.14, y - 0.04))
     elif text.get_text() == 'Eastern Switzerland University of Applied Sciences':
         x, y = text.get_position()
-        text.set_position((x, y + 0.04))
+        text.set_position((x, y + 0.02))
     elif text.get_text() == 'University of Zurich':
         x, y = text.get_position()
-        text.set_position((x - 0.03, y - 0.03))
+        text.set_position((x - 0.98, y + 0.01))
     elif text.get_text() == 'ETHZ':
         x, y = text.get_position()
-        text.set_position((x + 0.01, y - 0.005))
+        text.set_position((x - 0.12, y + 0.02))
     elif text.get_text() == 'EAWAG':
         x, y = text.get_position()
-        text.set_position((x + 0.02, y + 0.02))
+        text.set_position((x + 0.02, y + 0.05))
     elif text.get_text() == 'Swiss Academy of Humanities and Social Sciences':
         x, y = text.get_position()
-        text.set_position((x - 0.05, y - 0.03))
+        text.set_position((x - 0.05, y - 0.06))
     elif text.get_text() == 'University of Applied Sciences and Arts of Southern Switzerland (SUPSI)':
         x, y = text.get_position()
         text.set_position((x - 0.04, y + 0.03))
     elif text.get_text() == 'Lucerne School of Design, Film and Art':
         x, y = text.get_position()
-        text.set_position((x - 0.08, y + 0.01))
+        text.set_position((x - 0.8, y - 0.02))
     elif text.get_text() == 'University of Lucerne':
         x, y = text.get_position()
-        text.set_position((x - 0.18, y - 0.02))
+        text.set_position((x + 0.08, y - 0.05))
     elif text.get_text() == 'University of Fribourg':
         x, y = text.get_position()
-        text.set_position((x + 0.04, y - 0.06))
+        text.set_position((x + 0.06, y - 0.1))
     elif text.get_text() == 'EMPA':
         x, y = text.get_position()
         text.set_position((x + 0.02, y - 0.04))
+    elif text.get_text() == 'University of St. Gallen':
+        x, y = text.get_position()
+        text.set_position((x, y + 0.02))
     elif text.get_text() == 'SIB Swiss Institute of Bioinformatics':
         x, y = text.get_position()
         text.set_position((x + 0.02, y - 0.01))
@@ -207,7 +216,7 @@ for text in texts:
         text.set_position((x + 0.02, y - 0.01))
     elif text.get_text() == 'EPFL':
         x, y = text.get_position()
-        text.set_position((x, y + 0.02))
+        text.set_position((x + 0.06, y - 0.03))
     elif text.get_text() == 'University of Lausanne':
         x, y = text.get_position()
         text.set_position((x + 0.02, y - 0.01))

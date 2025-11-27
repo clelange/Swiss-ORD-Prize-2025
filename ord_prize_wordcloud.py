@@ -63,8 +63,6 @@ patches, texts, autotexts = pie
 for i, autotext in enumerate(autotexts):
     color = patches[i].get_facecolor()
     autotext.set_color(get_text_color(color))
-for text in texts:
-    text.set_bbox(dict(boxstyle='round,pad=0.3', facecolor='white', alpha=0.7, edgecolor='none'))
 plt.title('Gender Distribution', fontproperties=font_prop, fontsize=16)
 plt.savefig('gender_pie_chart.pdf', transparent=True)
 
@@ -97,7 +95,6 @@ for i, autotext in enumerate(autotexts):
     color = patches[i].get_facecolor()
     autotext.set_color(get_text_color(color))
 for i, text in enumerate(texts):
-    text.set_bbox(dict(boxstyle='round,pad=0.3', facecolor='white', alpha=0.7, edgecolor='none'))
     # Move Mathematics label slightly right to avoid overlap
     if labels[i] == 'Mathematics, Natural-\nand Engineering Sciences':
         x, y = text.get_position()
@@ -120,8 +117,6 @@ patches, texts, autotexts = pie
 for i, autotext in enumerate(autotexts):
     color = patches[i].get_facecolor()
     autotext.set_color(get_text_color(color))
-for text in texts:
-    text.set_bbox(dict(boxstyle='round,pad=0.3', facecolor='white', alpha=0.7, edgecolor='none'))
 plt.title('Position of Applicants', fontproperties=font_prop, fontsize=16)
 plt.savefig('position_pie_chart.pdf', transparent=True)
 
@@ -152,22 +147,25 @@ stopwords.add("wedowind")
 stopwords.add("hcm")
 stopwords.add("covid")
 stopwords.add("papier")
+stopwords.add("papiers")
 stopwords.add("wed")
 stopwords.add("taming")
 stopwords.add("sans")
 stopwords.add("chlamydomonas")
+stopwords.add("cytometry")
+stopwords.add("cage")
 
 
 #generate the word cloud with parameters
 wc = WordCloud(background_color=None,
                mode='RGBA',
                font_path="Geneva.ttf",
-               max_words=90,
+               max_words=70,
                width=800,
                height=600,
                min_font_size =20,
-               max_font_size=100,
-               relative_scaling = 0.5,
+               max_font_size=120,
+               relative_scaling = 0.4,
                scale=2,
                stopwords=stopwords,
                random_state=1,
